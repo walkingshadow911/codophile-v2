@@ -10,6 +10,8 @@
     "create-admin": "node --env-file=.env.local scripts/createAdmin.mjs"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1010.0",
+    "@aws-sdk/s3-request-presigner": "^3.1010.0",
     "@monaco-editor/react": "^4.7.0",
     "algoliasearch": "^5.48.2",
     "bcryptjs": "^3.0.3",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

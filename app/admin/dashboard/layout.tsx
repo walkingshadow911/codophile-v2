@@ -12,7 +12,8 @@ import {
   Menu,
   X,
   UserCircle,
-  Code
+  Code,
+  Wand2
 } from 'lucide-react';
 
 export default function AdminDashboardLayout({
@@ -69,6 +70,7 @@ export default function AdminDashboardLayout({
 
   const navItems = [
     { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+    { label: 'Effects', href: '/admin/dashboard/effects', icon: Wand2 },
     { label: 'Administrators', href: '/admin/dashboard/administrators', icon: Users },
     { label: 'Settings', href: '/admin/dashboard/settings', icon: Settings },
   ];
