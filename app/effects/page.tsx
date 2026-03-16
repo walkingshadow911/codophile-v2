@@ -9,6 +9,8 @@ import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { effectsData } from "./data";
 import { LivePreview } from "@/components/EffectsUI/LivePreview";
+import Mascot from "@/components/EffectsUI/Mascot";
+
 
 const ITEMS_PER_PAGE = 9;
 
@@ -121,6 +123,15 @@ function EffectsContent() {
         />
 
       </main>
+    {/* --- MASCOT COMPONENT --- */}
+      {/* h-0 ensures this container takes up absolutely ZERO vertical space in your layout */}
+      <div className="relative w-full max-w-7xl mx-auto h-0 px-6">
+        {/* absolute and bottom-0 anchor the mascot exactly to the footer line */}
+        {/* left-6 aligns it with the left padding of your main content */}
+        <div className="absolute bottom-0 right-20 md:right-30 z-10 pointer-events-none">
+          <Mascot />
+        </div>
+      </div>
 
       <Footer />
     </div>
@@ -143,6 +154,7 @@ function EffectCard({ effect, index }: { effect: any; index: number }) {
               html={effect.code.html}
               css={effect.code.css}
               js={effect.code.js}
+              previewImage={effect.previewImage}
             />
           </div>
 

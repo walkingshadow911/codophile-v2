@@ -6,84 +6,133 @@ interface LivePreviewProps {
   html: string;
   css: string;
   js?: string;
+  previewImage: string;
 }
 
-export function LivePreview({ html, css, js }: LivePreviewProps) {
+export function LivePreview({ html, css, js, previewImage }: LivePreviewProps) {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { margin: "200px" }); // Preload a bit before it enters viewport
+
+  const isInView = useInView(containerRef, {
+    margin: "200px",
+  });
+
+  const [isHovered, setIsHovered] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
-  useEffect(() => {
-    // When in view, render. When out of view, unmount to save WebGL contexts.
-    // We can add a small timeout to prevent rapid mounting/unmounting during fast scrolls
-    let timeout: NodeJS.Timeout;
+  const hoverTimer = useRef<NodeJS.Timeout | null>(null);
+  const destroyTimer = useRef<NodeJS.Timeout | null>(null);
 
-    if (isInView) {
-      setShouldRender(true);
-    } else {
-      timeout = setTimeout(() => {
-        setShouldRender(false);
-      }, 1000); // Keep it alive for 1s after leaving viewport to avoid flicker on small scrolls
+  const [tabVisible, setTabVisible] = useState(true);
+
+  useEffect(() => {
+    const handleVisibility = () => {
+      setTabVisible(document.visibilityState === "visible");
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibility);
+  }, []);
+
+  // Manage iframe lifecycle
+  useEffect(() => {
+    if (!tabVisible) {
+      setShouldRender(false);
+      return;
     }
 
-    return () => clearTimeout(timeout);
-  }, [isInView]);
+    if (isHovered && isInView) {
+      setShouldRender(true);
+    } else {
+      destroyTimer.current = setTimeout(() => {
+        setShouldRender(false);
+      }, 800);
+    }
+
+    return () => {
+      if (destroyTimer.current) clearTimeout(destroyTimer.current);
+    };
+  }, [isHovered, isInView, tabVisible]);
+
+  const handleMouseEnter = () => {
+    hoverTimer.current = setTimeout(() => {
+      setIsHovered(true);
+    }, 150);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    setIsHovered(false);
+  };
 
   const srcDoc = `
-    <html>
-      <head>
-        <style>
-          /* Force the internal content to be at least as large as the scaled-up iframe */
-          html, body { 
-            margin: 0; 
-            padding: 0; 
-            width: 100%;
-            height: 100%;
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background: transparent; 
-            overflow: hidden;
-          }
-          /* This ensures backgrounds like gradients/grids fill the entire view */
-          body > * {
-            flex-shrink: 0;
-          }
-          ${css}
-        </style>
-      </head>
-      <body>
-        ${html}
-        <script>${js || ""}</script>
-      </body>
-    </html>
+  <html>
+    <head>
+      <style>
+        html, body {
+          margin:0;
+          padding:0;
+          width:100%;
+          height:100%;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          background:transparent;
+          overflow:hidden;
+        }
+        body > * {
+          flex-shrink:0;
+        }
+        ${css}
+      </style>
+    </head>
+    <body>
+      ${html}
+      <script>${js || ""}</script>
+    </body>
+  </html>
   `;
 
   return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,#1f1545,#0d0b1a_70%)]">
+    <div
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center bg-[radial-gradient(circle_at_top_left,#1f1545,#0d0b1a_70%)]"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {shouldRender ? (
         <iframe
           srcDoc={srcDoc}
           className="
-                /* 1. We make the iframe exactly 2x the size of the container */
-                w-[200%] h-[200%] 
-                absolute
-                top-1/2 left-1/2
-                -translate-x-1/2 -translate-y-1/2
-                border-none 
-                bg-transparent 
-                /* 2. Scale it down by 0.5 to fit perfectly (1/2 = 0.5) */
-                scale-[0.5] 
-                transition-opacity duration-500
-                "
-          title="preview"
+            w-[200%] h-[200%]
+            absolute
+            top-1/2 left-1/2
+            -translate-x-1/2 -translate-y-1/2
+            scale-[0.5]
+            border-none
+            bg-transparent
+            transition-opacity duration-300
+          "
           sandbox="allow-scripts"
+          title="preview"
         />
       ) : (
-        <div className="flex flex-col items-center justify-center text-gray-600 gap-2 animate-pulse">
-          <Loader2 className="w-6 h-6 animate-spin" />
-          <span className="text-xs uppercase tracking-widest opacity-70">Loading Preview...</span>
-        </div>
+        <>
+          <img
+            src={previewImage}
+            className="w-full h-full object-cover pointer-events-none"
+            loading="lazy"
+          />
+
+          {!isInView && (
+            <div className="absolute flex flex-col items-center justify-center text-gray-500 gap-2 animate-pulse">
+              <Loader2 className="w-5 h-5 animate-spin" />
+              <span className="text-xs uppercase tracking-widest opacity-70">
+                Preview
+              </span>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
