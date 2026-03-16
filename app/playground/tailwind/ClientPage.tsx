@@ -136,6 +136,27 @@ const categories = [
         icon: "/icons/interactivity.png",
         href: "/playground/tailwind/select-menus",
         color: "from-violet-500 to-purple-500"
+    },
+    {
+        title: "Masks",
+        description: "Control element visibility using image and gradient masks.",
+        icon: "/icons/filters.png",
+        href: "/playground/tailwind/masks",
+        color: "from-teal-400 to-cyan-500"
+    },
+    {
+        title: "Scroll",
+        description: "Master scroll behavior, snap alignment, padding, and margin.",
+        icon: "/icons/interactivity.png",
+        href: "/playground/tailwind/scroll",
+        color: "from-blue-400 to-indigo-500"
+    },
+    {
+        title: "Transitions",
+        description: "Control transition properties, duration, easing, and delays.",
+        icon: "/icons/animations.png",
+        href: "/playground/tailwind/transitions",
+        color: "from-indigo-500 to-purple-500"
     }
 ];
 

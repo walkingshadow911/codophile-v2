@@ -5,6 +5,38 @@ import { Github, Twitter, Linkedin, Mail, Heart, ArrowRight } from "lucide-react
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
+    const [status, setStatus] = React.useState<{
+        type: 'idle' | 'loading' | 'success' | 'error';
+        message: string;
+    }>({ type: 'idle', message: 'No spam, unsubscribe at any time.' });
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+        const email = formData.get('email') as string;
+        const firstName = formData.get('firstName') as string;
+        const lastName = formData.get('lastName') as string;
+
+        setStatus({ type: 'loading', message: 'Subscribing...' });
+
+        try {
+            const res = await fetch('/api/newsletter', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, firstName, lastName }),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setStatus({ type: 'success', message: 'Successfully subscribed!' });
+                form.reset();
+            } else {
+                setStatus({ type: 'error', message: data.error || 'Something went wrong.' });
+            }
+        } catch (err) {
+            setStatus({ type: 'error', message: 'Error connecting to server.' });
+        }
+    };
 
     return (
         <footer className="relative bg-[#020010] border-t border-white/5 pt-32 pb-16 overflow-hidden">
@@ -31,20 +63,49 @@ export default function Footer() {
                             Design at the speed of thought.
                         </p>
 
-                        {/* Newsletter Mockup */}
-                        <div className="max-w-sm">
+                        {/* Newsletter Signup */}
+                        <div className="max-w-md">
                             <h5 className="text-white font-medium mb-3">Subscribe to our newsletter</h5>
-                            <div className="flex gap-2">
-                                <input
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-violet-500/50 focus:bg-white/10 transition-all"
-                                />
-                                <button className="bg-violet-600 hover:bg-violet-500 text-white px-4 py-2.5 rounded-lg flex items-center justify-center transition-colors">
-                                    <ArrowRight size={18} />
-                                </button>
-                            </div>
-                            <p className="text-xs text-gray-500 mt-2">No spam, unsubscribe at any time.</p>
+                            <form onSubmit={handleSubmit} className="space-y-3">
+                                <div className="grid grid-cols-2 gap-2">
+                                    <input
+                                        name="firstName"
+                                        type="text"
+                                        placeholder="First Name"
+                                        required
+                                        className="bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-violet-500/50 focus:bg-white/10 transition-all w-full"
+                                    />
+                                    <input
+                                        name="lastName"
+                                        type="text"
+                                        placeholder="Last Name"
+                                        required
+                                        className="bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-violet-500/50 focus:bg-white/10 transition-all w-full"
+                                    />
+                                </div>
+                                <div className="flex gap-2">
+                                    <input
+                                        name="email"
+                                        type="email"
+                                        placeholder="Enter your email"
+                                        required
+                                        className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-violet-500/50 focus:bg-white/10 transition-all"
+                                    />
+                                    <button
+                                        type="submit"
+                                        disabled={status.type === 'loading'}
+                                        className="bg-violet-600 hover:bg-violet-500 disabled:bg-violet-800 disabled:cursor-not-allowed text-white px-4 py-2.5 rounded-lg flex items-center justify-center transition-colors group"
+                                    >
+                                        <ArrowRight size={18} className={`${status.type === 'loading' ? 'animate-pulse' : 'group-hover:translate-x-1'} transition-transform`} />
+                                    </button>
+                                </div>
+                            </form>
+                            <p className={`text-xs mt-2 transition-colors duration-300 ${status.type === 'error' ? 'text-red-400' :
+                                    status.type === 'success' ? 'text-green-400' :
+                                        'text-gray-500'
+                                }`}>
+                                {status.message}
+                            </p>
                         </div>
                     </div>
 
