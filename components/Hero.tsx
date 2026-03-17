@@ -46,13 +46,8 @@ export default function Hero() {
     };
 
     return (
-        <section className="relative min-h-screen w-full flex items-center justify-center pt-32 pb-20 overflow-hidden bg-[#030014]">
-            {/* Dynamic Background */}
-            <div className="absolute inset-0 bg-[#030014]">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-                <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 blur-3xl opacity-20 w-96 h-96 bg-purple-500 rounded-full" />
-                <div className="absolute bottom-0 left-0 translate-y-12 -translate-x-12 blur-3xl opacity-20 w-96 h-96 bg-indigo-500 rounded-full" />
-            </div>
+        <section className="relative min-h-screen w-full flex items-center justify-center pt-32 pb-20 overflow-hidden bg-transparent">
+
 
             <div className="relative z-10 max-w-7xl w-full mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
 

@@ -16,6 +16,7 @@ import {
 import Image from 'next/image';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Mascot from "@/components/EffectsUI/Mascot";
 
 const categories = [
     {
@@ -172,17 +173,22 @@ export default function TailwindPlaygroundClient() {
             </div>
 
             <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto relative z-10">
-                <div className="mb-16">
-                    <Link href="/playground" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6 text-sm group">
-                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Selection
-                    </Link>
-                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
-                        Tailwind <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-teal-400 to-white">Playground</span>
-                    </h1>
-                    <p className="text-gray-400 text-lg max-w-2xl leading-relaxed">
-                        Rapidly prototype with Tailwind CSS utility classes.
-                        Select a category to explore the available utilities visually.
-                    </p>
+                <div className="mb-16 flex flex-col md:flex-row justify-between items-start gap-8">
+                    <div>
+                        <Link href="/playground" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6 text-sm group">
+                            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Selection
+                        </Link>
+                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+                            Tailwind <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-teal-400 to-white">Playground</span>
+                        </h1>
+                        <p className="text-gray-400 text-lg max-w-2xl leading-relaxed">
+                            Rapidly prototype with Tailwind CSS utility classes.
+                            Select a category to explore the available utilities visually.
+                        </p>
+                    </div>
+                    <div className="hidden md:block shrink-0 pr-8">
+                        <Mascot />
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
