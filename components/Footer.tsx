@@ -186,7 +186,7 @@ export default function Footer() {
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-6">
                         {[
-                            { icon: Github, href: "https://github.com/digicraft-one", label: "GitHub" },
+                            { icon: Github, href: "https://github.com/ayushkumarsingh2422005/codophile-v2", label: "GitHub" },
                             { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
                             { icon: Linkedin, href: "https://www.linkedin.com/company/digicraft-tech/", label: "LinkedIn" },
                             { icon: Mail, href: "mailto:hello@codophile.in", label: "Email" },
