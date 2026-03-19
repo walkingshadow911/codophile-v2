@@ -4,15 +4,14 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ArrowLeft, Play, Code, Layers, RefreshCw, Terminal, XCircle, Trash2, Maximize2, Minimize2, Download, Layout, Columns, Square, X, GripVertical } from "lucide-react";
 import Link from "next/link";
-import { effectsData } from "../data";
 import Editor from "@monaco-editor/react";
 
-export default function ClientEditor() {
+export default function ClientEditor({ initialEffect }: { initialEffect: any }) {
     const params = useParams();
     const router = useRouter();
     const effectId = params.id as string;
 
-    const effect = effectsData.find(e => e.id === effectId);
+    const effect = initialEffect;
 
     // Editor State
     const [htmlCode, setHtmlCode] = useState("");
@@ -422,6 +421,7 @@ ${component}`;
                     {/* Iframe Container */}
                     <div className="flex-1 min-h-0 relative bg-[radial-gradient(circle_at_top_left,#1f1545,#0d0b1a_70%)] flex flex-col">
                         <iframe
+                            key={srcDoc}
                             srcDoc={srcDoc}
                             className={`w-full flex-1 min-h-0 relative z-10 border-0 ${isDragging ? 'pointer-events-none' : ''}`}
                             title="preview"

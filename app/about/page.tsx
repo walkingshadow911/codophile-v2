@@ -83,10 +83,10 @@ export default function AboutPage() {
                         className="grid grid-cols-2 md:grid-cols-4 gap-8 border-y border-white/5 py-12"
                     >
                         {[
-                            { label: "Designers", value: "10K+", icon: Users },
-                            { label: "Components", value: "500+", icon: Code },
+                            { label: "Designers", value: "4", icon: Users },
+                            { label: "Components", value: "100+", icon: Code },
                             { label: "Templates", value: "50+", icon: Palette },
-                            { label: "Community", value: "25K+", icon: Trophy },
+                            { label: "Community", value: "10K+", icon: Trophy },
                         ].map((stat, idx) => (
                             <motion.div key={idx} variants={fadeIn} className="text-center">
                                 <div className="flex justify-center mb-4 text-indigo-400">
@@ -180,9 +180,11 @@ export default function AboutPage() {
                         <div className="absolute left-1/2 -translate-x-1/2 h-full w-px bg-white/10" />
 
                         {[
-                            { year: "2024", title: "Inception", desc: "The idea of Codophile was born from a late-night coding session." },
-                            { year: "2025", title: "Waitlist Launch", desc: "Over 5,000 developers joined our waitlist in just one week." },
-                            { year: "2026", title: "Global Beta", desc: "Launched our public beta to users across 100+ countries." },
+                            { year: "2023", title: "The Inception", desc: "It started as a first-year project—just a raw idea and a blank editor. We built a pure website from scratch, driven by curiosity and the thrill of creation." },
+                            { year: "2024 - 2025", title: "The Hiatus", desc: "The project was shelved and forgotten for two years as life took over. The repository sat dormant in the digital void, waiting for its second chance." },
+                            { year: "Early 2026", title: "The Resurrection", desc: "A solo return to the codebase. We dusted off the old repo, refactoring the core with modern tech and a renewed vision to build something real." },
+                            { year: "Late 2026", title: "The Assembly", desc: "Like-minded developers joined the mission. Together, we transformed the prototype into a scalable, production-ready platform for the world." },
+                            { year: "Future", title: "The Horizon", desc: "Expanding capabilities with advanced generators and community features. We are just getting started on making Codophile the ultimate dev tool." },
                         ].map((item, idx) => (
                             <motion.div
                                 key={idx}
@@ -204,106 +206,37 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* Team Section */}
                 <section className="mb-24">
                     <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white flex items-center justify-center gap-3">
                         <Users className="text-indigo-400" /> Meet the Creators
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
-                        {/* Lead Developer */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:bg-white/10 transition-colors group relative overflow-hidden"
-                        >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-violet-500 to-fuchsia-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                            <div className="w-24 h-24 bg-linear-to-tr from-violet-500 to-fuchsia-500 rounded-full mx-auto mb-6 flex items-center justify-center text-3xl font-bold text-white shadow-lg group-hover:scale-110 transition-transform">
-                                A
-                            </div>
-                            <h3 className="text-xl font-semibold text-white">Ayush Kumar Singh</h3>
-                            <p className="text-indigo-400 text-sm mb-4 font-medium uppercase tracking-wide">Lead Developer & Founder</p>
-                            <p className="text-gray-400 text-sm leading-relaxed">
-                                Visionary leader passionate about creating intuitive developer tools and solving complex UI challenges.
-                            </p>
-                        </motion.div>
 
-                        {/* Team Member 1 */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                            className="bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:bg-white/10 transition-colors group relative overflow-hidden"
-                        >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-cyan-500 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                            <div className="w-24 h-24 bg-linear-to-tr from-cyan-500 to-blue-500 rounded-full mx-auto mb-6 flex items-center justify-center text-3xl font-bold text-white shadow-lg group-hover:scale-110 transition-transform">
-                                R
-                            </div>
-                            <h3 className="text-xl font-semibold text-white">Roshni Kumari</h3>
-                            <p className="text-cyan-400 text-sm mb-4 font-medium uppercase tracking-wide">Team Member</p>
-                            <p className="text-gray-400 text-sm leading-relaxed">
-                                Driving frontend innovation and ensuring seamless user experiences across the platform.
-                            </p>
-                        </motion.div>
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {[
+                            { name: "Ayush Kumar Singh", role: "Lead Developer & Founder", gradient: "from-violet-500 to-fuchsia-500", roleColor: "text-violet-400" },
+                            { name: "Roshni Kumari", role: "Team Member", gradient: "from-cyan-500 to-blue-500", roleColor: "text-cyan-400" },
+                            { name: "Aprajita Kumari", role: "Team Member", gradient: "from-pink-500 to-rose-500", roleColor: "text-pink-400" },
+                            { name: "Sakshi Kumari", role: "Team Member", gradient: "from-amber-500 to-orange-500", roleColor: "text-amber-400" },
+                            { name: "DigiCraft Innovation", role: "Parent Company", gradient: "from-emerald-500 to-teal-500", roleColor: "text-emerald-400" },
+                        ].map((member, idx) => (
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.1 }}
+                                className="bg-white/5 border border-white/10 rounded-xl px-8 py-6 text-center hover:bg-white/10 transition-all group relative overflow-hidden min-w-[200px] flex-1 max-w-[250px]"
+                            >
+                                <div className={`absolute top-0 left-0 w-full h-0.5 bg-linear-to-r ${member.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300`} />
 
-                        {/* Team Member 2 */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.3 }}
-                            className="bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:bg-white/10 transition-colors group relative overflow-hidden"
-                        >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-pink-500 to-rose-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                            <div className="w-24 h-24 bg-linear-to-tr from-pink-500 to-rose-500 rounded-full mx-auto mb-6 flex items-center justify-center text-3xl font-bold text-white shadow-lg group-hover:scale-110 transition-transform">
-                                A
-                            </div>
-                            <h3 className="text-xl font-semibold text-white">Aprajita Kumari</h3>
-                            <p className="text-pink-400 text-sm mb-4 font-medium uppercase tracking-wide">Team Member</p>
-                            <p className="text-gray-400 text-sm leading-relaxed">
-                                Crafting beautiful interfaces and maintaining high design standards in every component.
-                            </p>
-                        </motion.div>
-
-                        {/* Team Member 3 */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4 }}
-                            className="bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:bg-white/10 transition-colors group relative overflow-hidden"
-                        >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-amber-500 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                            <div className="w-24 h-24 bg-linear-to-tr from-amber-500 to-orange-500 rounded-full mx-auto mb-6 flex items-center justify-center text-3xl font-bold text-white shadow-lg group-hover:scale-110 transition-transform">
-                                S
-                            </div>
-                            <h3 className="text-xl font-semibold text-white">Sakshi Kumari</h3>
-                            <p className="text-amber-400 text-sm mb-4 font-medium uppercase tracking-wide">Team Member</p>
-                            <p className="text-gray-400 text-sm leading-relaxed">
-                                Focused on robust architecture and scalable solutions for the growing user base.
-                            </p>
-                        </motion.div>
-
-                        {/* DigiCraft */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.5 }}
-                            className="bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:bg-white/10 transition-colors group relative overflow-hidden"
-                        >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-emerald-500 to-teal-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                            <div className="w-24 h-24 bg-linear-to-tr from-emerald-500 to-teal-500 rounded-full mx-auto mb-6 flex items-center justify-center text-3xl font-bold text-white shadow-lg group-hover:scale-110 transition-transform">
-                                D
-                            </div>
-                            <h3 className="text-xl font-semibold text-white">DigiCraft Innovation</h3>
-                            <p className="text-emerald-400 text-sm mb-4 font-medium uppercase tracking-wide">Parent Company</p>
-                            <p className="text-gray-400 text-sm leading-relaxed">
-                                Supporting the vision of Codophile with resources and innovation.
-                            </p>
-                        </motion.div>
+                                <h3 className="text-lg font-bold text-white mb-1 group-hover:text-white/90 transition-colors">
+                                    {member.name}
+                                </h3>
+                                <p className={`text-[10px] font-bold uppercase tracking-widest ${member.roleColor}`}>
+                                    {member.role}
+                                </p>
+                            </motion.div>
+                        ))}
                     </div>
                 </section>
 

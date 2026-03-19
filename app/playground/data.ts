@@ -73,6 +73,11 @@ export const playgroundData = {
                 title: "CSS Pagination Playground - Navigation Styles",
                 description: "Design and customize CSS pagination links. Experiment with various styles like bordered, rounded, active states, and hover effects.",
                 keywords: ["css pagination", "pagination styles", "active state", "hover effects", "breadcrumb"]
+            },
+            buttons: {
+                title: "CSS Buttons Playground - Styling & Hover Effects",
+                description: "Design, style, and animate CSS buttons. Experiment with colors, borders, shadows, hover effects, and button groups.",
+                keywords: ["css buttons", "button styling", "button hover", "css button groups", "button animations"]
             }
         }
     },
@@ -135,6 +140,26 @@ export const playgroundData = {
                 title: "Tailwind Pagination Playground - Navigation Components",
                 description: "Design and customize Tailwind CSS pagination links. Experiment with various styles like bordered, rounded, active states, and hover effects using utility classes.",
                 keywords: ["tailwind pagination", "pagination components", "active state tailwind", "hover effects tailwind", "breadcrumb tailwind"]
+            },
+            buttons: {
+                title: "Tailwind Buttons Playground - Button Components & Variants",
+                description: "Design and customize Tailwind CSS buttons. Experiment with sizes, rounded corners, colors, hover states, and button groups using utility classes.",
+                keywords: ["tailwind buttons", "button components", "tailwind button variants", "button hover tailwind", "button group tailwind"]
+            },
+            masks: {
+                title: "Tailwind Mask Utilities Playground - Image & Gradient Masking",
+                description: "Master Tailwind mask utilities including mask-image, mask-clip, mask-size, and gradient masks with interactive controls.",
+                keywords: ["tailwind mask", "mask-image", "mask-clip", "gradient mask", "tailwind masking"]
+            },
+            scroll: {
+                title: "Tailwind Scroll Utilities Playground - Behavior & Snap Alignment",
+                description: "Master Tailwind scroll utilities including scroll-behavior, scroll-snap-type, scroll-snap-align, and scroll-padding with interactive controls.",
+                keywords: ["tailwind scroll", "scroll-behavior", "scroll-snap", "scroll-padding", "scroll-margin"]
+            },
+            transitions: {
+                title: "Tailwind Transition Utilities Playground - Duration, Easing & Delay",
+                description: "Master Tailwind transition utilities including transition-property, duration, timing-function, delay, and transition-behavior with interactive controls.",
+                keywords: ["tailwind transition", "transition-property", "transition-duration", "transition-timing-function", "transition-delay"]
             }
         }
     }

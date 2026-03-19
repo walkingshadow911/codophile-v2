@@ -1,0 +1,15 @@
+services:
+  codophile:
+    build:
+      context: .
+      args:
+        - NEXT_PUBLIC_ALGOLIA_APP_ID=${NEXT_PUBLIC_ALGOLIA_APP_ID}
+        - NEXT_PUBLIC_ALGOLIA_SEARCH_KEY=${NEXT_PUBLIC_ALGOLIA_SEARCH_KEY}
+        - NEXT_PUBLIC_ALGOLIA_INDEX_NAME=${NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local
+    environment:
+      - NODE_ENV=production
+    restart: always
